@@ -9,11 +9,9 @@ if [ -z "$VIRTUAL_ENV" ]; then
     source venv/bin/activate
 fi
 
-# Check if model checkpoint exists
-if [ ! -f "./models/best.pt" ]; then
-    echo "⚠️  Warning: Model checkpoint not found at ./models/best.pt"
-    echo "Genre detection will not work until you train the model."
-fi
+# Check if model exists
+if [ ! -f "./checkpoints/best.pt" ]; then
+    echo "⚠️  Warning: Model checkpoint not found at ./checkpoints/best.pt"
 
 # Check if Docker services are running
 if ! docker compose ps | grep -q "Up"; then

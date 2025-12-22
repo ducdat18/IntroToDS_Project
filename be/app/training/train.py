@@ -12,8 +12,8 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from tqdm.autonotebook import tqdm
 
-from dataset import MelSpectrogram
-from model import CNNTransformer
+from app.ml.dataset import MelSpectrogram
+from app.ml.model import CNNTransformer
 
 
 def get_args() -> argparse.Namespace:
