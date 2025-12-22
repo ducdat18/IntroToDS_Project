@@ -1,0 +1,39 @@
+# Core ML and Audio Processing
+torch>=2.0.0
+torchvision>=0.15.0
+librosa>=0.10.0
+numpy>=1.24.0,<2.0.0
+scipy>=1.10.0
+scikit-learn>=1.3.0
+
+# Image Processing
+opencv-python>=4.8.0
+pillow>=10.0.0
+matplotlib>=3.7.0
+
+# Deep Learning Utilities
+tensorboard>=2.14.0
+tqdm>=4.65.0
+
+# API Framework
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.0
+python-multipart>=0.0.6
+
+# Audio Processing
+soundfile>=0.12.0
+audioread>=3.0.0
+numba>=0.58.0
+
+# MinIO and Storage
+minio>=7.1.0
+python-dotenv>=1.0.0
+
+# Database
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.0
+alembic>=1.12.0
+
+# Utilities
+pydantic-settings>=2.0.0
+python-slugify>=8.0.0
