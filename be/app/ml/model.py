@@ -47,4 +47,3 @@ class CNNTransformer(nn.Module):
     x = torch.mean(attn_output, dim=1)
     x = self.classifier(x)
     return x
-
