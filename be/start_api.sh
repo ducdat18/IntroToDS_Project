@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Ensure we are in the directory where the script is located
+cd "$(dirname "$0")"
+
 echo "🎵 Starting Music Management API..."
 echo "========================================"
 
@@ -12,6 +15,7 @@ fi
 # Check if model exists
 if [ ! -f "./checkpoints/best.pt" ]; then
     echo "⚠️  Warning: Model checkpoint not found at ./checkpoints/best.pt"
+fi
 
 # Check if Docker services are running
 if ! docker compose ps | grep -q "Up"; then
@@ -29,4 +33,3 @@ echo ""
 
 # Start the FastAPI server (output to console, no log file)
 uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Ensure we are in the directory where the script is located
+cd "$(dirname "$0")"
+
 echo "🚀 Starting Music Management Services..."
 echo "========================================"
 
@@ -22,9 +25,9 @@ echo ""
 echo "📊 Service URLs:"
 echo "  - MinIO Console: http://localhost:9001"
 echo "  - MinIO API: http://localhost:9000"
-echo "  - PostgreSQL: localhost:5432"
+echo "  - PostgreSQL: localhost:5433"
 echo ""
-echo "🔑 Default Credentials:"
+echo "KEY: Default Credentials:"
 echo "  MinIO:"
 echo "    Username: minioadmin"
 echo "    Password: minioadmin123"

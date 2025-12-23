@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Ensure we are in the directory where the script is located
+cd "$(dirname "$0")"
+
 echo "🛑 Stopping Music Management Services..."
 echo "========================================"
 
