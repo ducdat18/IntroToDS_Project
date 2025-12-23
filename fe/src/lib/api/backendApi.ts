@@ -4,6 +4,7 @@
  */
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const API_V1_URL = `${API_URL}/api/v1`;
 
 // Backend response types matching FastAPI responses
 export interface AudioFile {
@@ -71,7 +72,7 @@ export const backendApi = {
     const formData = new FormData();
     formData.append('audio_file', file);
 
-    const response = await fetch(`${API_URL}/upload`, {
+    const response = await fetch(`${API_V1_URL}/upload`, {
       method: 'POST',
       body: formData,
     });
@@ -100,7 +101,7 @@ export const backendApi = {
     if (params.limit) queryParams.append('limit', params.limit.toString());
     if (params.offset) queryParams.append('offset', params.offset.toString());
 
-    const url = `${API_URL}/search${queryParams.toString() ? '?' + queryParams.toString() : ''}`;
+    const url = `${API_V1_URL}/search${queryParams.toString() ? '?' + queryParams.toString() : ''}`;
     const response = await fetch(url);
 
     if (!response.ok) throw new Error('Failed to search audio files');
@@ -112,7 +113,7 @@ export const backendApi = {
    * GET /files/{id}
    */
   async getFileInfo(fileId: number): Promise<AudioFile> {
-    const response = await fetch(`${API_URL}/files/${fileId}`);
+    const response = await fetch(`${API_V1_URL}/files/${fileId}`);
     if (!response.ok) {
       if (response.status === 404) throw new Error('File not found');
       throw new Error('Failed to fetch file info');
@@ -125,7 +126,7 @@ export const backendApi = {
    * GET /download/{id}
    */
   async downloadAudio(fileId: number, originalFilename: string): Promise<void> {
-    const response = await fetch(`${API_URL}/download/${fileId}`);
+    const response = await fetch(`${API_V1_URL}/download/${fileId}`);
     if (!response.ok) throw new Error('Failed to download audio');
 
     const blob = await response.blob();
@@ -143,7 +144,7 @@ export const backendApi = {
    * Get streaming URL for audio file
    */
   getStreamUrl(fileId: number): string {
-    return `${API_URL}/stream/${fileId}`;
+    return `${API_V1_URL}/stream/${fileId}`;
   },
 
   /**
@@ -151,7 +152,7 @@ export const backendApi = {
    * DELETE /files/{id}
    */
   async deleteAudio(fileId: number): Promise<void> {
-    const response = await fetch(`${API_URL}/files/${fileId}`, {
+    const response = await fetch(`${API_V1_URL}/files/${fileId}`, {
       method: 'DELETE',
     });
 
@@ -163,7 +164,7 @@ export const backendApi = {
    * GET /stats
    */
   async getStats(): Promise<StatsResponse> {
-    const response = await fetch(`${API_URL}/stats`);
+    const response = await fetch(`${API_V1_URL}/stats`);
     if (!response.ok) throw new Error('Failed to fetch statistics');
     return response.json();
   },

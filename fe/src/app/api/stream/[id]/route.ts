@@ -6,6 +6,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const API_V1_URL = `${API_URL}/api/v1`;
 
 export async function GET(
   request: NextRequest,
@@ -15,7 +16,7 @@ export async function GET(
 
   try {
     // Fetch the audio file from the backend streaming endpoint
-    const response = await fetch(`${API_URL}/stream/${id}`);
+    const response = await fetch(`${API_V1_URL}/stream/${id}`);
 
     if (!response.ok) {
       return NextResponse.json(
