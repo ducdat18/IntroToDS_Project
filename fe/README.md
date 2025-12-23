@@ -1,148 +1,143 @@
-# MusicDiscover - Music Discovery Platform for Video Editors
+# MusicDiscover - Music Discovery Platform
 
-An open web platform for video editors and content creators to search, download, and share background music for video production. Built with Next.js and Tailwind CSS, inspired by Spotify's design.
+A modern, responsive web platform for searching, listening to, and downloading background music. Built with Next.js 16 and Tailwind CSS v4, featuring a Spotify-inspired dark UI.
 
-## Key Features
+## 🚀 Key Features
 
-### 1. Home Page
-- Hero section with call-to-action buttons
-- Browse by Video Context cards (Funny, Vlog, Drama, Cinematic)
-- Explore Genres grid showcase
-- Features section introducing AI-powered classification
+### 1. Music Discovery
+- **Browse by Genre**: Explore 8 distinct music genres (Classical, Electronic, Hip-Hop, Rock, etc.) with dedicated listing pages.
+- **Video Contexts**: Find music curated for 13 specific video types:
+  - **Funny, Vlog, Drama, Cinematic, Gaming, Action, Romantic, Horror, Documentary, Travel, Corporate, Sports, Wedding**.
+- **Search**: Real-time searching by title or artist.
 
-### 2. Browse by Genre
-- Grid layout displaying all 16 music genres:
-  - Blues, Classical, Country, Easy Listening, Electronic, Experimental
-  - Folk, Hip-Hop, Instrumental, International, Jazz, Old-Time Historic
-  - Pop, Rock, Soul-RnB, Spoken
-- Dynamic routes for each genre with song listings
+### 2. Music Playback & Details
+- **Dedicated Music Page**: Detailed view for every track (`/music/[id]`).
+- **Interactive Audio Player**:
+  - Play/Pause, Volume control, Mute toggle.
+  - Seekable progress bar.
+  - Auto-play capability.
+- **Music Information**: Displays artist, duration, upload date, and AI-classified genre.
+- **Context Suggestions**: Automatically suggests video contexts based on the track's genre.
 
-### 3. Browse by Video Context
-- 4 main video contexts:
-  - **Funny**: Upbeat and energetic music
-  - **Vlog**: Easy-listening music for daily vlogs
-  - **Drama**: Emotional and impactful music
-  - **Cinematic**: Epic and atmospheric music
-- Each context displays suitable genres
-- Usage guide for each context
+### 3. Upload System
+- **File Upload**: Drag-and-drop or file selection for audio files.
+- **AI Classification**: (Integrated) Uploaded tracks are analyzed to automatically detect genre and suggest usage contexts.
+- **Metadata**: Automatic extraction of title/artist with manual override.
 
-### 4. Upload Music
-- Audio file upload form
-- Input for title and artist
-- AI genre classification simulation
-- Display classification results and suggested contexts
-- Upload guidelines
+### 4. Technical Features
+- **Responsive Design**: Fully responsive layout for desktop, tablet, and mobile.
+- **Mock/Real API Toggle**: Built-in switch (`IS_MOCK`) to toggle between a simulated backend and a real Python/FastAPI backend.
+- **Modern Architecture**: Uses Next.js App Router, Server Components, and React Hooks.
 
-### 5. Components
-- **Header**: Navigation with logo, menu links, upload button
-- **Footer**: Links, social icons, copyright
-- **MusicCard**: Card component displaying music information with play/download buttons
+## 🛠 Tech Stack
 
-## Technologies Used
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Icons**: [Heroicons](https://heroicons.com/)
+- **Linting**: ESLint
 
-- **Framework**: Next.js 16 (App Router)
-- **Styling**: Tailwind CSS v4
-- **Language**: TypeScript
-- **Icons**: Heroicons (SVG)
-
-## Color Scheme (Spotify-inspired)
-
-- **Primary Green**: #1DB954
-- **Background Dark**: #121212
-- **Card Background**: #1a1a1a
-- **Spotify Black**: #191414
-- **Border**: #282828
-- **Hover**: #2a2a2a
-
-## Project Structure
+## 📂 Project Structure
 
 ```
-music-discovery-platform/
-├── src/
-│   ├── app/
-│   │   ├── browse/
-│   │   │   ├── genre/
-│   │   │   │   ├── [slug]/
-│   │   │   │   │   └── page.tsx
-│   │   │   │   └── page.tsx
-│   │   │   └── context/
-│   │   │       ├── [slug]/
-│   │   │       │   └── page.tsx
-│   │   │       └── page.tsx
-│   │   ├── upload/
-│   │   │   └── page.tsx
-│   │   ├── layout.tsx
-│   │   ├── page.tsx
-│   │   └── globals.css
-│   ├── components/
-│   │   ├── layout/
-│   │   │   ├── Header.tsx
-│   │   │   └── Footer.tsx
-│   │   └── music/
-│   │       └── MusicCard.tsx
-│   ├── lib/
-│   │   ├── constants.ts
-│   │   └── mockData.ts
-│   └── types/
-│       └── index.ts
-└── package.json
+src/
+├── app/
+│   ├── api/                # Next.js API Routes (proxies/streams)
+│   ├── browse/
+│   │   ├── context/        # Browse by Video Context pages
+│   │   └── genre/          # Browse by Genre pages
+│   ├── music/
+│   │   └── [id]/           # Music Detail & Player page
+│   ├── upload/             # Music Upload page
+│   ├── layout.tsx          # Root layout
+│   └── page.tsx            # Home page
+├── components/
+│   ├── layout/             # Header, Footer
+│   ├── music/              # AudioPlayer, MusicCard
+│   └── ui/                 # SearchBar, LoadingSpinner, ErrorMessage
+├── hooks/
+│   └── useMusic.ts         # React hooks for music data fetching
+├── lib/
+│   ├── api/
+│   │   ├── musicApi.ts     # Main service (handles Mock vs Real switch)
+│   │   ├── backendApi.ts   # Axios/Fetch client for real backend
+│   │   └── adapter.ts      # Data transformation layer
+│   └── mockData.ts         # Static data for testing
+└── types/                  # TypeScript definitions
 ```
 
-## How to Run the Project
+## 🚦 Getting Started
 
-### Development
+### Prerequisites
+- Node.js 18+ (LTS recommended)
+- npm or yarn
+
+### Installation
+
+1.  Clone the repository:
+    ```bash
+    git clone <repository-url>
+    cd <project-folder>
+    ```
+
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+
+3.  Configure Environment (Optional):
+    Create a `.env.local` file to override defaults if connecting to a real backend.
+    ```env
+    NEXT_PUBLIC_API_URL=http://localhost:8000
+    ```
+
+### Running Development Server
+
 ```bash
-cd music-discovery-platform
-npm install  # If dependencies are not installed yet
 npm run dev
 ```
+Open [http://localhost:3000](http://localhost:3000) with your browser.
 
-Open your browser and visit: http://localhost:3000
+### Building for Production
 
-### Build for Production
 ```bash
 npm run build
 npm start
 ```
 
-## API Integration (To-Do)
+## 🔌 API Integration
 
-The frontend is currently using mock data. To integrate with the backend:
+The frontend is designed to work with a backend API but can run in standalone mode.
 
-1. **Upload Music API**:
-   - Endpoint: `POST /api/upload`
-   - Handle file upload and call AI model to classify genre
+**Switching Modes:**
+Open `src/lib/api/musicApi.ts` and set the `IS_MOCK` constant:
+- `true`: Uses local mock data (no backend required).
+- `false`: Connects to `NEXT_PUBLIC_API_URL` (default: `http://localhost:8000`).
 
-2. **Get Music API**:
-   - `GET /api/music` - Get all music tracks
-   - `GET /api/music?genre={genre}` - Filter by genre
-   - `GET /api/music?context={context}` - Filter by video context
+**Expected Backend Endpoints:**
+- `GET /files` - List all files
+- `GET /files/{id}` - Get file metadata
+- `GET /files/genre/{genre}` - Filter by genre
+- `GET /search` - Search files
+- `POST /upload` - Upload audio file (returns genre classification)
+- `GET /download/{id}` - Stream/Download audio
 
-3. **Download Music API**:
-   - `GET /api/download/{id}` - Download music file
+## 🎨 Design System
 
-## Mapping Logic
+**Colors (Spotify-inspired):**
+- Primary: `#1DB954` (Green)
+- Background: `#121212` (Dark Grey)
+- Card Surface: `#181818`
+- Text: `#FFFFFF` (White) & `#B3B3B3` (Light Grey)
 
-### Genre to Video Context
-The system uses mapping logic to suggest video contexts based on genre:
+## 🔮 Future Roadmap
 
-- **Funny**: Electronic, Hip-Hop, Pop, Rock
-- **Vlog**: Country, Easy Listening, Folk, Hip-Hop, Instrumental, International, Jazz, Pop, Soul-RnB
-- **Drama**: Blues, Classical, Country, Folk, Jazz, Old-Time Historic, Soul-RnB, Spoken
-- **Cinematic**: Classical, Electronic, Experimental, Instrumental, International, Old-Time Historic, Rock
+- [ ] User Authentication & Profiles
+- [ ] User Playlists & "Liked Songs"
+- [ ] Waveform Visualization in Player
+- [ ] Advanced Filtering (BPM, Mood)
+- [ ] Social Sharing features
 
-## Features to Develop
-
-- [ ] Integrate AI backend for genre classification
-- [ ] Real audio player with waveform visualization
-- [ ] User authentication and profile
-- [ ] Playlist creation
-- [ ] Advanced search and filter
-- [ ] Favorite/like system
-- [ ] Comments and ratings
-- [ ] Mobile responsive improvements
-- [ ] Dark/Light theme toggle
-
-## License
+## 📄 License
 
 This project is for educational purposes.
