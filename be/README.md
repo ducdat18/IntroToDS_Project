@@ -93,3 +93,42 @@ You can get the model checkpoints here
 [Checkpoints](https://drive.google.com/drive/folders/10immdRoflqZELBn1LTnoX2kxqMIJcY8b?usp=sharing)
 
 Note: *best.pt* is used for inferencing, while *last.pt* is used for continual training
+
+## 🚀 Running the Backend API
+
+To run the full backend system (FastAPI server + MinIO + PostgreSQL) for the music management application, follow these steps:
+
+### 1. Prerequisites
+- Docker & Docker Compose
+- Python 3.10+
+
+### 2. Setup Environment
+```bash
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### 3. Start Infrastructure Services
+Start MinIO (storage) and PostgreSQL (database) using Docker:
+```bash
+./start_services.sh
+```
+*This script initializes the necessary containers and waits for them to be ready.*
+
+### 4. Start the API Server
+Run the FastAPI application:
+```bash
+./start_api.sh
+```
+*The server will start at http://localhost:8000*
+- **Swagger UI:** http://localhost:8000/docs
+- **ReDoc:** http://localhost:8000/redoc
+
+To stop the services later, run:
+```bash
+./stop_services.sh
+```
