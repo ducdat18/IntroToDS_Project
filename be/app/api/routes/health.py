@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+from sqlalchemy import text
 from app.core.database import get_db
 from app.services.storage import minio_service
 from app.services.ml_service import ml_service
@@ -14,13 +15,19 @@ async def health_check(db: Session = Depends(get_db)):
     minio_connected = True
     try:
         minio_service.client.bucket_exists(minio_service.bucket_name)
-    except:
+    except Exception as e:
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error(f"MinIO health check failed: {str(e)}")
         minio_connected = False
         
     db_connected = True
     try:
-        db.execute(db.text("SELECT 1"))
-    except:
+        db.execute(text("SELECT 1"))
+    except Exception as e:
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error(f"Database health check failed: {str(e)}")
         db_connected = False
         
     status = "healthy" if (model_loaded and minio_connected and db_connected) else "degraded"
